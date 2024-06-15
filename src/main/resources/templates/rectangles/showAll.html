@@ -9,28 +9,53 @@
 </head>
 <body>
     <header>
-        <a href="/add.html" class="btn" style="margin: 20px; border: 2px solid black;">Add Student</a>
+        <a href="/add.html" class="btn" style="margin: 20px; border: 2px solid black;">Add Rectangle</a>
     </header>
     <main class="container-fluid">
-        <h1 class="text-center">Students</h1>
+        <h1 class="text-center">List of Rectangles</h1>
         <div class="row justify-content-center">
             <div class="flex-container">
                 <div style="display: flex; flex-wrap: wrap; justify-content: center;">
-                    <div th:each="rectangles : ${rectangles}" class="rectangles-item" style="position: relative; display: inline-block;">
-                        <form th:action="@{/rectangles/edit}" method="get" class="edit-form">
-                            <input type="hidden" name="uid" th:value="${rectangles.uid}" />
-                            <button type="submit" th:style="'border: 1px solid black; display: flex; align-items: center; justify-content: center; margin: 5px; padding: 5px; width: ' + ${rectangles.width} + '; height: ' + (${rectangles.height} / 20 + 5) + 'em; color: ' + (${rectangles.color} / 10 + 5) + 'em; font-size: ' + 10 + 'pt;'">
-                                <div>
-                                    <div th:text="${rectangles.name}" style="margin-bottom: 0;"></div>
-                                </div>
-                            </button>
-                        </form>
-                
-                        <form th:action="@{/rectangles/delete}" method="post" class="delete-form">
-                            <input type="hidden" name="uid" th:value="${rectangles.uid}" />
-                            <button type="submit">Delete</button>
-                        </form>
-                    </div>
+                    <table id="RectangleTable" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Width</th>
+                                <th>Height</th>
+                                <th>Color</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr th:each="rectangles : ${rectangles}">
+
+                                <td th:text="${rectangles.uid}"></td>
+                                <td> 
+                                    <form th:action="@{/rectangles/edit}" method="get" class="edit-form">
+                                        <input type="hidden" name="uid" th:value="${rectangles.uid}" />
+                                        <button type="submit" style="border: none; background: none; text-decoration: underline;">
+                                            <div>
+                                                <div th:text="${rectangles.name}" style="margin-bottom: 0;"></div>
+                                            </div>
+                                        </button>
+                                    </form>
+                                </td>
+
+                                <td th:text="${rectangles.width}"></td>
+                                <td th:text="${rectangles.height}"></td>
+                                <td th:text="${rectangles.color}"></td>
+                                <td>
+                                    <form th:action="@{/rectangles/delete}" method="post" class="delete-form">
+                                        <input type="hidden" name="uid" th:value="${rectangles.uid}" />
+                                        <button type="submit">Delete</button>
+                                    </form>
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

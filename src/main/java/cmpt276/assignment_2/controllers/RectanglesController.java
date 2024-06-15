@@ -61,9 +61,9 @@ public class RectanglesController {
 
     @GetMapping("/rectangles/edit")
     public String editRectangle(@RequestParam("uid") int uid, Model model) {
-        Rectangle rectangle = rectangleRepo.findById(uid).orElse(null);
-        if (rectangle != null) {
-            model.addAttribute("rectangle", rectangle);
+        Rectangle rectangles = rectangleRepo.findById(uid).orElse(null);
+        if (rectangles != null) {
+            model.addAttribute("rectangles", rectangles);
             return "rectangles/editRectangle";
         } else {
             return "redirect:/rectangles/view";
@@ -75,6 +75,5 @@ public class RectanglesController {
         rectangleRepo.save(rectangle);
         return "redirect:/rectangles/view";
     }
-
     
 }
