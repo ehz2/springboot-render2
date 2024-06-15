@@ -12,6 +12,10 @@
         <div class="row justify-content-center">
             <div class="col-md-4">
                 <h1>Rectangle Information</h1>
+
+                <div th:style="'width: ' + ${rectangles.width} + 'px; height: ' + ${rectangles.height} + 'px; background-color: ' + ${rectangles.color} + ';'">
+                </div>
+
                 <form action="/rectangles/update" method="post">
                     <input type="hidden" id="uid" name="uid" th:value="${rectangles.uid}">
                     
