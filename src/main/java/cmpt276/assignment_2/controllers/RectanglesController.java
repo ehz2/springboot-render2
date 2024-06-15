@@ -27,7 +27,7 @@ public class RectanglesController {
 
         List<Rectangle> rectangles = rectangleRepo.findAll();
 
-        model.addAttribute("us", rectangles);
+        model.addAttribute("rectangles", rectangles);
 
         return "rectangles/showAll";
 
