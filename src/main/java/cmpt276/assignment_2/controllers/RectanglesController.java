@@ -24,8 +24,6 @@ public class RectanglesController {
     @GetMapping("/rectangles/view")
     public String getAllRectangles(Model model) {
 
-        // System.out.println("Getting all rectangles");
-
         List<Rectangle> rectangles = rectangleRepo.findAll();
 
         model.addAttribute("us", rectangles);
@@ -46,9 +44,10 @@ public class RectanglesController {
 
         response.setStatus(201);
 
-        // fix?
-        return "rectangles/addedRectangle";
+        return "redirect:/rectangles/view";
 
     }
+
+    
     
 }
