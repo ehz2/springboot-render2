@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import cmpt276.assignment_2.models.Rectangle;
@@ -48,6 +49,32 @@ public class RectanglesController {
 
     }
 
-    
+    @PostMapping("/rectangles/delete")
+    public String deleteRectangle(@RequestParam("uid") int uid) {
+        if (rectangleRepo.existsById(uid)) {
+            rectangleRepo.deleteById(uid);
+            return "redirect:/rectangles/view";
+        } else {
+            return "redirect:/rectangles/view";
+        }
+    }
+
+    @GetMapping("/rectangles/edit")
+    public String editRectangle(@RequestParam("uid") int uid, Model model) {
+        Rectangle rectangle = rectangleRepo.findById(uid).orElse(null);
+        if (rectangle != null) {
+            model.addAttribute("rectangle", rectangle);
+            return "rectangles/editRectangle";
+        } else {
+            return "redirect:/rectangles/view";
+        }
+    }
+
+    @PostMapping("/rectangles/update")
+    public String updateRectangle(@ModelAttribute Rectangle rectangle) {
+        rectangleRepo.save(rectangle);
+        return "redirect:/rectangles/view";
+    }
+
     
 }
