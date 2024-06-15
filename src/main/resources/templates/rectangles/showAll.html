@@ -16,13 +16,12 @@
         <div class="row justify-content-center">
             <div class="flex-container">
                 <div style="display: flex; flex-wrap: wrap; justify-content: center;">
-                    <div th:each="rectangle : ${stu}" class="rectangle" style="position: relative; display: inline-block;">
+                    <div th:each="rectangle : ${us}" class="rectangle" style="position: relative; display: inline-block;">
                         <form th:action="@{/rectangles/edit}" method="get" class="edit-form">
                             <input type="hidden" name="uid" th:value="${rectangle.uid}" />
                             <button type="submit" th:style="'border: 1px solid black; display: flex; align-items: center; justify-content: center; margin: 5px; padding: 5px; width: ' + ${rectangle.width} + '; height: ' + (${rectangle.height} / 20 + 5) + 'em; color: ' + (${rectangle.color} / 10 + 5) + 'em; font-size: ' + 10 + 'pt;'">
                                 <div>
                                     <div th:text="${rectangle.name}" style="margin-bottom: 0;"></div>
-                                    <div th:text="${'GPA: ' + rectangle.gpa}" style="margin-top: 0;"></div>
                                 </div>
                             </button>
                         </form>
